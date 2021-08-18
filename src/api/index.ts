@@ -1,6 +1,7 @@
 // 统一出口
 import ZTRequest from './request'
 import { BASE_URL, TMIE_OUT } from './request/config'
+import localCache from '@/utils/cache'
 
 const ztRequest = new ZTRequest({
   baseURL: BASE_URL,
@@ -8,10 +9,10 @@ const ztRequest = new ZTRequest({
   interceptors: {
     requestInterceptor: (res) => {
       // token 的拦截
-      // const token = ''
-      // if (token) {
-      //   res.headers.Authorization = `Bearer ${token}`
-      // }
+      const token = localCache.getCache('token')
+      if (token) {
+        res.headers.Authorization = `Bearer ${token}`
+      }
       console.log('请求成功的拦截', res)
       return res
     },

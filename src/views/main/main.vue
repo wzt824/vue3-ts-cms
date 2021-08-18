@@ -1,7 +1,7 @@
 <template>
   <div class="page-warp">
     <el-tooltip content="Top center" placement="top">
-      <el-button>{{ $store.state.message }}</el-button>
+      <el-button>{{ $store.state.name }}</el-button>
     </el-tooltip>
     {{ message }}
   </div>
