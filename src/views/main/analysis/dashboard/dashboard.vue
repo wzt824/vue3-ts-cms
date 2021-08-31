@@ -1,59 +1,56 @@
 <template>
   <div class="dashboard-wrap">
-    <h2>dashboard</h2>
-    <div ref="divRef" style="width:500px;height:400px;"></div>
+    <el-row :gutter="10">
+      <el-col :span="7">
+        <zt-card title="分类商品数量(饼图)"></zt-card>
+      </el-col>
+      <el-col :span="10">
+        <zt-card title="不同城市商品售量"></zt-card>
+      </el-col>
+      <el-col :span="7">
+        <zt-card title="分类商品数量(玫瑰图)"></zt-card>
+      </el-col>
+    </el-row>
+    <el-row :gutter="10" class="count-row">
+      <el-col :span="12">
+        <zt-card title="分类商品的数量">
+          <base-echart></base-echart>
+        </zt-card>
+      </el-col>
+      <el-col :span="12">
+        <zt-card title="不同城市的收藏"></zt-card>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted } from 'vue'
+import { defineComponent } from 'vue'
+import ZtCard from '@/base-ui/card'
+import BaseEchart from '@/base-ui/echart'
 
-import * as echarts from 'echarts'
+import { useStore } from '@/store'
 
 export default defineComponent({
   name: 'dashboard',
+  components: {
+    ZtCard,
+    BaseEchart
+  },
   setup() {
-    // 通过绑定ref获取dom元素
-    const divRef = ref<HTMLElement>()
-    onMounted(() => {
-      // 1. 初始化echarts实例
-      const echartsInstance = echarts.init(divRef.value!, 'light', {
-        renderer: 'svg'
-      })
-      // 2. 指定图表的配置项和数据
-      const option = {
-        title: {
-          text: 'ECharts 入门示例',
-          subtext: '这是一个副标题'
-        },
-        tooltip: {
-          trigger: 'axis',
-          axisPointer: {
-            type: 'cross'
-          }
-        },
-        legend: {
-          data:['销量']
-        },
-        xAxis: {
-          data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
-        },
-        yAxis: {},
-        series: [{
-          name: '销量',
-          type: 'effectScatter',
-          data: [5, 20, 36, 10, 10, 20]
-        }]
-      }
 
-      // 3.使用刚指定的配置项和数据显示图表。
-      echartsInstance.setOption(option)
-    })
+    const store = useStore()
+    store.dispatch('dashboard/getDashboarDatadAction')
+
     return {
-      divRef
+
     }
   }
 })
 </script>
 
-<style scoped lang="less"></style>
+<style scoped lang="less">
+.count-row {
+  margin-top: 20px;
+}
+</style>

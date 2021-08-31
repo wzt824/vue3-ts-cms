@@ -4,6 +4,7 @@ import { IRootState, IStoreType } from './types'
 import login from './login/login'
 import system from './main/system/system'
 // import product from './main/product/product'
+import dashboard from './main/analysis/dashboard'
 
 // 获取接口信息
 import { getPageListData } from '@/api/main/system/system'
@@ -65,7 +66,8 @@ const store = createStore<IRootState>({
   },
   modules: {
     login,
-    system
+    system,
+    dashboard
     // product
   }
 })

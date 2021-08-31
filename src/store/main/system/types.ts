@@ -1,7 +1,7 @@
 // 存放类型的的文件
 export interface ISystemState {
   // 搜索条件
-  searchConditions: object
+  searchConditions: any
   // 用户数据列表
   usersList: any[]
   // 当前用户数据共有多少条数据
