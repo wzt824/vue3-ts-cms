@@ -1,5 +1,5 @@
 <template>
-  <div class="login-panel-warp">
+  <div class="login-panel-wrap">
     <h1 class="title">后台管理系统</h1>
     <el-tabs type="border-card" stretch v-model="currentTab">
       <el-tab-pane name="account">
@@ -69,7 +69,7 @@ export default defineComponent({
 </script>
 
 <style scoped lang='less'>
-.login-panel-warp {
+.login-panel-wrap {
   margin-bottom: 150px;
   width: 320px;
 

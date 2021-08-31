@@ -1,5 +1,6 @@
-import ztRequest from '../index'
-import { IAccount, IDataType, ILoginResult } from './type'
+import ztRequest from '@/api'
+import { IAccount, ILoginResult } from './type'
+import { IDataType } from '@/api/types'
 enum LoginAPI {
   AccountLogin = '/login',
   LoginUserInfo = '/users/', // /users/:id

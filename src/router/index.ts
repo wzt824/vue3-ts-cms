@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
 import localCache from '@/utils/cache'
+import { firstMenu } from '@/utils/map-menus'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -9,11 +10,19 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/login',
-    component: () => import('views/login/login.vue')
+    name: 'login',
+    component: () => import('@/views/login/login.vue')
   },
   {
     path: '/main',
-    component: () => import('views/main/main.vue')
+    name: 'main',
+    component: () => import('@/views/main/main.vue')
+    // children: [] => 根据userMenus来决定children的内容（userMenus是后台获取的数据）
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'not-found',
+    component: () => import('@/views/not-found/not-found.vue')
   }
 ]
 
@@ -22,12 +31,18 @@ const router = createRouter({
   history: createWebHistory()
 })
 
-router.beforeEach((to, from) => {
+// 导航守卫
+router.beforeEach((to) => {
   if (to.path !== '/login') {
     const token = localCache.getCache('token')
     if (!token) {
-      router.push('/login')
+      return '/login'
     }
+  }
+
+  // 解决main是报错
+  if (to.path === '/main') {
+    return firstMenu.url
   }
 })
 

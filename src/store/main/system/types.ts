@@ -1,0 +1,29 @@
+// 存放类型的的文件
+export interface ISystemState {
+  // 搜索条件
+  searchConditions: object
+  // 用户数据列表
+  usersList: any[]
+  // 当前用户数据共有多少条数据
+  usersTotalCount: number
+  // 角色数据列表
+  roleList: any[]
+  // 当前角色数据共有多少条数据
+  roleTotalCount: number
+  // 商品数据列表
+  goodsList: any[]
+  // 当前商品数据共有多少条数据
+  goodsTotalCount: number
+  // 菜单数据列表
+  menuList: any[]
+  // 当前菜单数据共有多少条数据
+  menuTotalCount: number
+  // 部门数据列表
+  departmentList: any[]
+  // 当前部门数据共有多少条数据
+  departmentTotalCount: number
+  // 分类数据列表
+  categoryList: any[]
+  // 当前分类数据共有多少条数据
+  categoryTotalCount: number
+}

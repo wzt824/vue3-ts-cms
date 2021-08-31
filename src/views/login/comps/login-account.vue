@@ -1,8 +1,8 @@
 <template>
-  <div class="login-account-warp">
+  <div class="login-account-wrap">
     <el-form label-width="55px" :rules="accountRules" :model="account" ref="ruleForm" class="login-account-ruleForm">
       <el-form-item label="账号" prop="name">
-        <el-input v-model="account.name" maxlength="8"></el-input>
+        <el-input v-model="account.name" maxlength="10"></el-input>
       </el-form-item>
       <el-form-item label="密码" prop="password">
         <el-input show-password v-model="account.password" maxlength="10"></el-input>
@@ -58,7 +58,7 @@ export default defineComponent({
 </script>
 
 <style scoped lang='less'>
-.login-account-warp{
+.login-account-wrap{
   .login-account-ruleForm{
     margin-top: 22px;
   }

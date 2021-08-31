@@ -1,5 +1,5 @@
 <template>
-  <div class="login-phone-warp">
+  <div class="login-phone-wrap">
     <el-form :rules="phoneRules" :model="phone" ref="ruleForm" label-width="70px" class="login-phone-ruleForm">
       <el-form-item label="手机号" prop="number">
         <el-input v-model="phone.number" maxlength="11"></el-input>
@@ -57,7 +57,7 @@ export default defineComponent({
 </script>
 
 <style scoped lang='less'>
-.login-phone-warp{
+.login-phone-wrap{
   .login-phone-ruleForm{
     margin-top: 22px;
     .get-code{

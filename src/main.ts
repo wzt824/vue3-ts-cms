@@ -11,11 +11,10 @@ import 'assets/css/index.less'
 // import 'element-plus/lib/theme-chalk/index.css'
 
 const app = createApp(App)
-
 // globalRegister(app) === app.use(globalRegister)
 app.use(globalRegister)
+setupStore()
 app.use(router)
 app.use(store)
-setupStore()
 // app.use(ElementPlus)
 app.mount('#app')

@@ -1,5 +1,5 @@
 <template>
-  <div class="login-warp">
+  <div class="login-wrap">
     <login-panel />
   </div>
 </template>
@@ -8,6 +8,7 @@
 import { defineComponent, ref } from 'vue'
 import LoginPanel from './comps/login-panel.vue'
 export default defineComponent({
+  name: 'login',
   components:{
     LoginPanel
   },
@@ -21,7 +22,7 @@ export default defineComponent({
 </script>
 
 <style scoped lang='less'>
-.login-warp{
+.login-wrap{
   display: flex;
   justify-content: center;
   align-items: center;

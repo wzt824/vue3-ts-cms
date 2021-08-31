@@ -2,7 +2,7 @@ import axios from 'axios'
 import type { AxiosInstance } from 'axios'
 import type { ZTRequestInterceptors, ZTRequestConfig } from './type'
 
-import { ElLoading } from 'element-plus'
+import { ElLoading, ElMessage } from 'element-plus'
 import { ILoadingInstance } from 'element-plus/lib/el-loading/src/loading.type'
 
 const DEFAULT_LOADING = true
@@ -33,7 +33,7 @@ class ZTRequest {
 
     // 2.添加所有的实例都有的拦截器
     this.instance.interceptors.request.use((config) => {
-      console.log('请求成功的拦截器---所有')
+      // console.log('请求成功的拦截器---所有')
       if (this.showLoading) {
         this.loading = ElLoading.service({
           lock: true,
@@ -43,18 +43,26 @@ class ZTRequest {
       }
       return config
     }, (err) => {
-      console.log('请求失败的拦截器---所有')
+      // console.log('请求失败的拦截器---所有')
       return err
     })
     this.instance.interceptors.response.use((res) => {
-      console.log('响应成功的拦截器---所有')
+      // console.log('响应成功的拦截器---所有')
       // 将loading移除
       this.loading?.close()
 
       // 拦截状态码是后台统一的，此处-1001是错误信息
       const data = res.data
+      if (data === undefined) {
+        ElMessage({
+          showClose: true,
+          message: '网络连接失败，请稍后再试',
+          type: 'error'
+        })
+        return
+      }
       if (data.code === '-1001') {
-        console.log('请求失败，错误信息')
+        // console.log('请求失败，错误信息')
       } else {
         return data
       }
@@ -63,7 +71,7 @@ class ZTRequest {
       this.loading?.close()
 
       // 根据请求失败的状态码展示不同的信息
-      console.log('响应失败的拦截器---所有')
+      // console.log('响应失败的拦截器---所有')
       if (err.response.status === 404) {
         console.log('404 not find~')
       }
@@ -71,7 +79,7 @@ class ZTRequest {
     })
   }
 
-  request<T> (config: ZTRequestConfig<T>): Promise<T> {
+  request<T = any> (config: ZTRequestConfig<T>): Promise<T> {
     return new Promise((resolve, reject) => {
       // 1.单个请求对请求config的处理：单个请求体的拦截器
       if (config.interceptors?.requestInterceptor) {
@@ -101,19 +109,19 @@ class ZTRequest {
     })
   }
 
-  get<T> (config: ZTRequestConfig<T>): Promise<T> {
+  get<T = any> (config: ZTRequestConfig<T>): Promise<T> {
     return this.request<T>({ ...config, method: 'GET' })
   }
 
-  post<T> (config: ZTRequestConfig<T>): Promise<T> {
+  post<T = any> (config: ZTRequestConfig<T>): Promise<T> {
     return this.request<T>({ ...config, method: 'POST' })
   }
 
-  delete<T> (config: ZTRequestConfig<T>): Promise<T> {
+  delete<T = any> (config: ZTRequestConfig<T>): Promise<T> {
     return this.request<T>({ ...config, method: 'DELETE' })
   }
 
-  patch<T> (config: ZTRequestConfig<T>): Promise<T> {
+  patch<T = any> (config: ZTRequestConfig<T>): Promise<T> {
     return this.request<T>({ ...config, method: 'PATCH' })
   }
 }
