@@ -1,5 +1,6 @@
 import { ILoginState } from './login/types'
 import { ISystemState } from './main/system/types'
+import { IDashboardState } from './main/analysis/types'
 // 存放类型的的文件
 export interface IRootState {
   entireDepartment: any[] // 全部的部门
@@ -11,6 +12,7 @@ export interface IRootState {
 export interface IRootWithModule {
   login: ILoginState
   system: ISystemState
+  dashboard: IDashboardState
 }
 
 export type IStoreType = IRootWithModule & IRootState
